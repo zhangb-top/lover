@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>可以成为我的恋人吗？</title>
+    <style>
+      button {
+        font-size: 18px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+      }
+      body {
+        background-color: #f1d5da;
+      }
+      .controll-audio {
+        width: 50px;
+        cursor: pointer;
+      }
+      .container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      .image {
+        width: 200px;
+      }
+      .question {
+        color: #68495b;
+      }
+      .buttons {
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .phone-buttons {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .yes {
+        background-color: #d4818e;
+        color: #fff;
+      }
+      .no {
+        background-color: #6784b1;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <audio
+      class="music"
+      src="./static/music.mp3"
+      autoplay="autoplay"
+      loop="loop"
+      preload="auto"
+    ></audio>
+    <img class="controll-audio" src="./static/love.png" />
+    <div class="container">
+      <img src="./static/heart.png" class="image" />
+      <h1 class="question">可以成为我的恋人吗？</h1>
+      <div class="buttons">
+        <button class="yes">可以</button>
+        <button class="no">不要</button>
+      </div>
+    </div>
+
+    <script>
+      let controllAudio = document.querySelector(".controll-audio");
+      let music = document.querySelector(".music");
+      let container = document.querySelector(".container");
+      let buttons = document.querySelector(".buttons");
+      let yesButton = document.querySelector(".yes");
+      let noButton = document.querySelector(".no");
+      let question = document.querySelector(".question");
+      let image = document.querySelector(".image");
+
+      let clickCount = 0;
+
+      const noTexts = [
+        "？你认真的吗…",
+        "要不再想想？",
+        "不许选这个！ ",
+        "我会很伤心…",
+        "不行:(",
+      ];
+
+      let isphone = IsPhone();
+      if (isphone) {
+        buttons.classList.add("phone-buttons");
+      }
+
+      controllAudio.addEventListener("click", function () {
+        if (music.paused) {
+          music.play();
+        } else {
+          music.pause();
+        }
+      });
+
+      noButton.addEventListener("click", function () {
+        clickCount++;
+
+        let yesSize = clickCount * 1.2;
+        yesButton.style.transform = `scale(${yesSize})`;
+
+        if (!isphone) {
+          noButton.style.transform = `translateX(${clickCount * 50}px)`;
+        } else {
+          noButton.style.transform = `translateY(${clickCount * 25}px)`;
+        }
+
+        let moveUp = clickCount * 25;
+        image.style.transform = `translateY(-${moveUp}px)`;
+        question.style.transform = `translateY(-${moveUp}px)`;
+
+        if (clickCount <= 5) {
+          noButton.innerText = noTexts[clickCount - 1];
+        }
+
+        // 图片变化（前 5 次变化）
+        if (clickCount === 1) image.src = "./static/shocked.png";
+        if (clickCount === 2) image.src = "./static/think.png";
+        if (clickCount === 3) image.src = "./static/angry.png";
+        if (clickCount === 4) image.src = "./static/crying.png";
+        if (clickCount >= 5) image.src = "./static/crying.png";
+      });
+
+      yesButton.addEventListener("click", function () {
+        container.innerHTML = `
+              <h1 style="width:100vw;">!!!喜欢你!! ( >᎑<)♡︎ᐝ</h1>
+              <img src="./static/hug.png" alt="拥抱">
+      `;
+
+        // document.body.style.overflow = "hidden";
+      });
+
+      function IsPhone() {
+        let info = navigator.userAgent;
+        let isPhone = /mobile/i.test(info);
+        return isPhone;
+      }
+    </script>
+  </body>
+</html>
