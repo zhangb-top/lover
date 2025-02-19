@@ -59,14 +59,14 @@
   <body>
     <audio
       class="music"
-      src="./static/music.mp3"
+      src="static/music.mp3"
       autoplay="autoplay"
       loop="loop"
       preload="auto"
     ></audio>
-    <img class="controll-audio" src="./static/love.png" />
+    <img class="controll-audio" src="static/love.png" />
     <div class="container">
-      <img src="./static/heart.png" class="image" />
+      <img src="static/heart.png" class="image" />
       <h1 class="question">可以成为我的恋人吗？</h1>
       <div class="buttons">
         <button class="yes">可以</button>
@@ -128,17 +128,17 @@
         }
 
         // 图片变化（前 5 次变化）
-        if (clickCount === 1) image.src = "./static/shocked.png";
-        if (clickCount === 2) image.src = "./static/think.png";
-        if (clickCount === 3) image.src = "./static/angry.png";
-        if (clickCount === 4) image.src = "./static/crying.png";
-        if (clickCount >= 5) image.src = "./static/crying.png";
+        if (clickCount === 1) image.src = "static/shocked.png";
+        if (clickCount === 2) image.src = "static/think.png";
+        if (clickCount === 3) image.src = "static/angry.png";
+        if (clickCount === 4) image.src = "static/crying.png";
+        if (clickCount >= 5) image.src = "static/crying.png";
       });
 
       yesButton.addEventListener("click", function () {
         container.innerHTML = `
               <h1 style="width:100vw;">!!!喜欢你!! ( >᎑<)♡︎ᐝ</h1>
-              <img src="./static/hug.png" alt="拥抱">
+              <img src="static/hug.png" alt="拥抱">
       `;
 
         // document.body.style.overflow = "hidden";
